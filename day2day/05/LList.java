@@ -67,7 +67,7 @@ public class LList{
 	// public Node nodeAtIndex(int index)
 	// 	Returns the Node at index.
 	// 	If index is out of bounds, return null
-	// Assumes starting at 0, i.e. head point to ZERO index Node
+	// Assumes starting at 0, i.e. head points to ZERO index Node
 	private Node nodeAtIndex(int index) {
 		int i = 0;
 		Node ptr = head;
