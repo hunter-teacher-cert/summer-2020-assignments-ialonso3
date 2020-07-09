@@ -156,8 +156,8 @@ public class LList{
 				return i;
 			ptr = ptr.getNext();
 		}
-		// return -1;
-		throw new NoSuchElementException();
+		return -1;
+		// throw new NoSuchElementException();
 	}
 	
 	// public int lebgth
