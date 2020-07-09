@@ -5,9 +5,8 @@ public class LList{
     private Node head;
 	private int len = 0;
 	
-	private static final int FRONT = -10;
-	private static final int INDEX = 0;
-	private static final int END = -20;
+	private static final int FRONT = -10000;
+	private static final int END = -20000;
 
 	// Default constructor
 	// 	Initializes an empty linked list.
@@ -17,7 +16,8 @@ public class LList{
 
 	// public void addFront(String value)
 	// 	Add a new Node containing value to the front of the list.
-    public void addFront(String data){
+    private void addFront(String data){
+		
 		Node newnode = new Node(data);
 
 		// first point the new node to the beginning
@@ -30,19 +30,29 @@ public class LList{
 	
 	// Add anywhere
 	public void add(String data, int where){
+		
+		if(data == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		if (where == FRONT)
 			addFront(data);
 		else if (where == END)
 			append(data);
 		else if (where >= 0)
 			insert(where, data);
+		else
+			throw new IndexOutOfBoundsException();
     }
-	
+	// Overload: add FRONT default
+	public void add(String data){
+		add(data, FRONT);
+	}
+ 
 	// public String toString()
 	// 	Returns a String representation of the list.
     public String toString(){
 		String s = "";
-
 		Node tmp;
 		tmp = head;
 		while (tmp != null){
@@ -53,7 +63,6 @@ public class LList{
 			// It's analagous to i=i+1 for an array (for loop)
 			tmp = tmp.getNext();
 		}
-
 		s = s + "null";
 		return s;
     } 
@@ -75,53 +84,62 @@ public class LList{
 			ptr = ptr.getNext();
 			i++;
 		}
+		if (ptr == null)
+			throw new IndexOutOfBoundsException();
 		return ptr;
 	}
 	
 	// public String get(int index)
 	// 	Returns the value (not the Node) at index.
-	// 	If index is out of bounds, return null.
+	// 	If index is out of bounds, return null. --> Exception
 	public String get(int index) {
 		Node ptr = nodeAtIndex(index);
-		if (ptr != null) 
-			return ptr.getData();
-		return null;
+		// if (ptr != null) 
+			return ptr.getData(); // exception for IndexOutOfBounds
+		// return null;
 	}
 	
 	// public void set(int index, String value)
 	// 	Set the Node at index to contain value
-	// 	If index is invalid, do nothing.
+	// 	If index is invalid, do nothing. --> Exception
 	public void set(int index, String value){
 		Node ptr = nodeAtIndex(index);
-		if ( ptr != null )
-			ptr.setData(value);	
+		// if ( ptr != null )
+			//ptr.setData(value);	// exception for IndexOutOfBounds
+		if( value == null) {
+			throw new IllegalArgumentException();
+		}
+		ptr.setData(value);
+		
 	}
 	
 	// public void append(String value)
 	// 	Add a node at the end, set data to value
-	public void append(String value){
+	private void append(String value){
 		Node ptr = nodeAtIndex(len-1);
-		Node newNode = new Node(value);
-		ptr.setNext(newNode);	
-		len++;
+		// if (ptr != null){
+			// exception for IndexOutOfBounds
+			Node newNode = new Node(value);
+			ptr.setNext(newNode);	
+			len++;
+		//}
 	}
 	
 	// public void insert(int index, String value)
 	// 	Insert a new Node containing value at index.
 	// 	If index is invalid, do nothing
-	public void insert(int index, String value){	
-		Node newNode = new Node(value);
+	private void insert(int index, String value){	
 		if (index == 0) {
-			newNode.setNext(head);
-			head = newNode;
-			len++;
+			addFront(value);
 		} else {
 			Node ptr = nodeAtIndex(index-1);
-			if (ptr != null){
+			Node newNode = new Node(value);
+			// if (ptr != null){
+				// exception for IndexOutOfBounds
 				newNode.setNext( ptr.getNext() );
 				ptr.setNext(newNode);
 				len++;
-			}
+			//}
 		}
 	}
 	
@@ -129,13 +147,17 @@ public class LList{
 	// 	Returns the index of the first time key occurs in the list.
 	// 	Returns -1 if key is not found.
 	public int search(String key) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
 		Node ptr = head;
 		for(int i=0; ptr!=null; i++) {
 			if (ptr.getData().equals(key) )
 				return i;
 			ptr = ptr.getNext();
 		}
-		return -1;
+		// return -1;
+		throw new NoSuchElementException();
 	}
 	
 	// public int lebgth
@@ -153,12 +175,15 @@ public class LList{
 				head = head.getNext();
 				len--;
 			}
+			else 
+				throw new IndexOutOfBoundsException();
 		} else {
 			Node ptr = nodeAtIndex(index-1);
-			if ( ptr != null ){
+			//if ( ptr != null ){
+				// exception for IndexOutOfBounds
 				ptr.setNext( ptr.getNext().getNext() );
 				len--;
-			}
+			//}
 		}
 		
 	}
