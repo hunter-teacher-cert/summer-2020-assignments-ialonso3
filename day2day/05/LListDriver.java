@@ -12,7 +12,6 @@ public class LListDriver {
 		System.out.println("Test Empty list print & isEmpty:");
 		System.out.println(g);
 		System.out.println(g.isEmpty());
-		System.out.println(g.length());
 
 		System.out.println("\nTest addFront 3x & isEmpty():");
 		g.add("good", FRONT);
@@ -20,7 +19,6 @@ public class LListDriver {
 		g.add("everyone!", FRONT);
 		System.out.println(g);
 		System.out.println(g.isEmpty());
-		System.out.println(g.length());
 
 	   System.out.println("\nTest get 0, 1, 5:");
 	   System.out.println(g.get(0));
@@ -64,18 +62,17 @@ public class LListDriver {
 		   System.out.println("5 is too far");
 	   } 
 	   System.out.println(g);
-	   System.out.println(g.length());
 	   
 	   System.out.println("\nTest append");
 	   g.add("EXTRA!", END);
 	   System.out.println(g);
-	   System.out.println(g.length());
 
 	   System.out.println("\nTest search \"woo!\", \"cool\", \"too far\"");
 	   System.out.println(g.search("woo!"));
 	   System.out.println(g.search("cool"));
 	   System.out.println(g.search("too far"));  //OK
 	   try {
+		   // No longer an exception
 		   System.out.println(g.search(null));
 	   }
 	   catch ( IllegalArgumentException e ) {
@@ -83,13 +80,20 @@ public class LListDriver {
 		   System.out.println("null Not found");
 	   } 
 	   
-
 	   System.out.println("\nTest remove 0, 2:");
 	   g.remove(0);
 	   System.out.println(g);
 	   g.remove(2);
 	   System.out.println(g);
-	   System.out.println(g.length());
-
+	   // Try to remove right after the last one
+	   try {
+		   g.remove( g.length() );
+	   }
+	   catch ( IndexOutOfBoundsException e ) {
+		   e.printStackTrace();
+		   System.out.println("Just passed the end!");
+	   } 
+	   System.out.println(g);
+	   
   }//main
 }//LListDriver
