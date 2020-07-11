@@ -1,9 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-// ******************************************************
-// This class requires my LList.class & Node.class files
-// ******************************************************
 public class MyStack{
       // add your internal data structure here
 	  private LinkedList<String> stack;
@@ -21,9 +18,9 @@ public class MyStack{
       public String pop(){
           // add code to remove and return the
           // item on the top of the stack
-		  String data = this.top();
-		  stack.removeFirst();
-		  return data;
+		  String data = this.top();		// get it (exception checked)
+		  stack.removeFirst();			// remove it
+		  return data;					// return it
       }
 
       public String top(){
@@ -33,6 +30,7 @@ public class MyStack{
 			return stack.getFirst();
 		  }
 		  catch (NoSuchElementException e) {
+			  // Modify LinkedList's exception to stack exception
 			  throw new EmptyStackException();
 		  }
       }
