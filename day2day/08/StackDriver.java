@@ -8,7 +8,7 @@ public class StackDriver {
 
 		System.out.println("Test Empty list print, isEmpty & size:");
 		System.out.println(g);
-		System.out.println(g.isEmpty());
+		// System.out.println(g.isEmpty());
 		System.out.printf("Size: %d\n",g.size());
 		
 		System.out.println("Test pop Empty list print:");
