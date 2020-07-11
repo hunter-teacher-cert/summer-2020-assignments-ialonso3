@@ -42,8 +42,6 @@ public class StackDriver {
 	   System.out.println("\nTest pop");
 	   System.out.println(g.pop());
 	   System.out.printf("Size: %d\n",g.size());
-
-	  
 	   
   }//main
 }//LListDriver
