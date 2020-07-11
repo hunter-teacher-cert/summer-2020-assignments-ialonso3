@@ -6,35 +6,35 @@ import java.util.*;
 // ******************************************************
 public class MyStack{
       // add your internal data structure here
-	  private LList stack;
+	  private LinkedList<String> stack;
 
       public MyStack(){
           // add constructor code
-		  stack = new LList();
+		  stack = new LinkedList<String>();
       }
 
       public void push(String data){
           // add code to push data on to the stack
-		  stack.add(data); // defaults to FRONT
+		  stack.addFirst(data);
       }
 
       public String pop(){
           // add code to remove and return the
           // item on the top of the stack
 		  String data = this.top();
-		  stack.remove(0);
+		  stack.removeFirst();
 		  return data;
       }
 
       public String top(){
           // add code to return but not remove the
-          // item on the top of the stack  
+          // item on the top of the stack   
 		  try {
-			return stack.get(0);
+			return stack.getFirst();
 		  }
-		  catch (IndexOutOfBoundsException e) {
+		  catch (NoSuchElementException e) {
 			  throw new EmptyStackException();
-		  }	
+		  }
       }
 
       public boolean isEmpty(){
@@ -44,16 +44,15 @@ public class MyStack{
 
       public int size(){
           // add code to return the number of items currently on the stack
-		  return stack.length();
+		  return stack.size();
 	  }
 	  
 	  public String toString(){
-          // add code to return the number of items currently on the stack
-		  String str = stack.toString();
-		  // strip away the NULL at the end
-		  str = str.substring(0,str.length()-4);
-		  // add HEAD and BOTTOM
-		  str = "HEAD-->"+str+"BOTTOM";
+		  String str = ":HEAD:-->";
+		  for (String s: stack) {
+			  str += s + "-->";
+		  }
+		  str += ":BOTTOM:";
 		  return str;
 	  }
 	  
@@ -65,6 +64,7 @@ public class MyStack{
 		// g.push("everyone!");
 		// System.out.println(g);
 		// System.out.println(g.isEmpty());
+		// System.out.println( g.top() );
 	  // }
 	  
   }
