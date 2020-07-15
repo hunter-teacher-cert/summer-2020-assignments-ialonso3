@@ -118,15 +118,20 @@ public class Boogle
 		return inx;
   }
   
+  // Sorts an ArrayList
   public static void selectionSort(ArrayList<Integer> al) {
 	  int tmp, inx;
 	  int low = 0;
 	  int end = al.size()-1;
+	  // loop until one less that the end
 	  while (low < end ) {
+		  // findSmallest returns the index to min
 		  inx = findSmallest(al,low,end);
+		  // swap min value with the value at low
 		  tmp = al.get(low);		// tmp gets the one at low
 		  al.set(low,al.get(inx));	// low gets the one at inx
 		  al.set(inx,tmp);			// inx gets tmp (the one at low)
+		  // increent starting point
 		  low++;	  
 	  }
   }
