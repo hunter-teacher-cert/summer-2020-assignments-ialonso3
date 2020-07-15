@@ -102,7 +102,8 @@ public class Boogle
 			inx = (int)((end-start)/2) + start;
 			Integer val = (Integer) al.get(inx);
 			if (val == target)
-				return inx;
+				// return inx;
+				return getFirst(al,inx);
 			else if (val > target)
 				end = inx;
 			else 
