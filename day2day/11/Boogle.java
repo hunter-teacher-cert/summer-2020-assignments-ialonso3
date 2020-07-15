@@ -123,15 +123,15 @@ public class Boogle
 	  int tmp, inx;
 	  int low = 0;
 	  int end = al.size()-1;
-	  // loop until one less that the end
+	  // loop until one less that the end (already sorted)
 	  while (low < end ) {
-		  // findSmallest returns the index to min
+		  // findSmallest returns the index to min value
 		  inx = findSmallest(al,low,end);
 		  // swap min value with the value at low
 		  tmp = al.get(low);		// tmp gets the one at low
 		  al.set(low,al.get(inx));	// low gets the one at inx
 		  al.set(inx,tmp);			// inx gets tmp (the one at low)
-		  // increent starting point
+		  // increment starting point
 		  low++;	  
 	  }
   }
