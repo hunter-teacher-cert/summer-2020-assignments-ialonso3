@@ -125,17 +125,12 @@ public class Boogle
   // sorted part and keeping track of both parts, sorted and not.
   //
   public static void selectionSort(ArrayList<Integer> al) {
-	  int tmp, inx;
 	  int low = 0;
 	  int end = al.size()-1;
 	  // loop until one less that the end (already sorted)
-	  while (low < end ) {
-		  // findSmallest returns the index to min value
-		  inx = findSmallest(al,low,end);
-		  // swap min value with the value at low
-		  tmp = al.get(low);		// tmp gets the one at low
-		  al.set(low,al.get(inx));	// low gets the one at inx
-		  al.set(inx,tmp);			// inx gets tmp (the one at low)
+	  while ( low < end ) {
+		  // find smallest bet low & end and swap it with low
+		  Collections.swap(al, low, findSmallest(al,low,end));
 		  // increment starting point
 		  low++;	  
 	  }
@@ -150,15 +145,14 @@ public class Boogle
 
       
     //~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
-      
       int smallIndex;
-      System.out.println("Testing findSmallest");
+      System.out.println("Testing findSmallest:");
       ArrayList<Integer>  slist = prestoArrayListo(20,0,200);
       smallIndex = findSmallest(slist,0,slist.size()-1);
       System.out.println(slist);
       System.out.printf("Smallest is at slist[%d] and is %d\n",smallIndex,slist.get(smallIndex));
       System.out.println("****************************************");
-	  System.out.println("Testing selectionSort");
+	  System.out.println("Testing selectionSort:");
 	  selectionSort(slist);
 	  System.out.println(slist);
       //~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~*/
