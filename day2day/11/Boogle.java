@@ -118,7 +118,12 @@ public class Boogle
 		return inx;
   }
   
+  // 
   // Sorts an ArrayList
+  //   Sorts by looping through the unsorted part of the array, 
+  // finding the minimum value, inserting it at the end of the 
+  // sorted part and keeping track of both parts, sorted and not.
+  //
   public static void selectionSort(ArrayList<Integer> al) {
 	  int tmp, inx;
 	  int low = 0;
