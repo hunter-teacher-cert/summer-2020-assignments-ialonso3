@@ -117,7 +117,19 @@ public class Boogle
 		}
 		return inx;
   }
-
+  
+  public static void selectionSort(ArrayList<Integer> al) {
+	  int tmp, inx;
+	  int low = 0;
+	  int end = al.size()-1;
+	  while (low < end ) {
+		  inx = findSmallest(al,low,end);
+		  tmp = al.get(low);		// tmp gets the one at low
+		  al.set(low,al.get(inx));	// low gets the one at inx
+		  al.set(inx,tmp);			// inx gets tmp (the one at low)
+		  low++;	  
+	  }
+  }
 
   //##################################################
   //##################################################
@@ -135,9 +147,12 @@ public class Boogle
       smallIndex = findSmallest(slist,0,slist.size()-1);
       System.out.println(slist);
       System.out.printf("Smallest is at slist[%d] and is %d\n",smallIndex,slist.get(smallIndex));
-      
+      System.out.println("****************************************");
+	  System.out.println("Testing selectionSort");
+	  selectionSort(slist);
+	  System.out.println(slist);
       //~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~*/
 
-}//end main
+}//end mainget 
 
 }//end class
