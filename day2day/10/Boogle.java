@@ -28,12 +28,23 @@ public class Boogle
     }
     return -1;
   }//end linSearch()
-
+  
+  // It checks for repeated elements before inx
+  private static int getFirst(ArrayList al, int inx) {
+	  for (int i=inx; i>0; i--) {
+		  if (al.get(inx).equals(al.get(inx-1))) 
+			  inx--;
+		  else 
+			  return inx;
+	  }
+	  return inx;
+  }
 
   //return index of target, or -1 if not found
-  // ArrayList contains integers!!!!!
   public static int binSearch( ArrayList al, int target, int start, int end )
   {
+	// ArrayList contains integers!!!!!
+	// if the number is repeated, it does not nec. find the first one!!!!
 	int size = end-start;
 	if ((size <= 0 )|| (end >= al.size()))
 		return -1;
@@ -47,7 +58,8 @@ public class Boogle
     int inx = (int)((end-start)/2) + start;
 	Integer val = (Integer) al.get(inx);
 	if (val == target)
-		return inx;
+		// return inx;
+		return getFirst(al,inx);
 	else if (val > target)
 		return binSearch(al,target,start,inx-1);
 	else 
@@ -57,32 +69,32 @@ public class Boogle
   //return index of target, or -1 if not found
   public static int binSearch( ArrayList al, int target )
   {
-	  //return binSearch(al, target, 0, al.size()-1);
+	  return binSearch(al, target, 0, al.size()-1);
 	  // *this is really the recursive method inside a while loop
-		int start = 0;
-		int end = al.size()-1;
-		int inx = 0;
-		while (end < al.size()) {
-			int size = end-start;
-			if (size <= 0 )
-				return -1;
-			if (size<=1) {
-				if(al.get(start).equals(target))
-					return start;
-				if ((size==1) && (al.get(end).equals(target)))
-					return end;
-				return -1;
-			}
-			inx = (int)((end-start)/2) + start;
-			Integer val = (Integer) al.get(inx);
-			if (val == target)
-				return inx;
-			else if (val > target)
-				end = inx-1;
-			else 
-				start = inx+1;
-		}
-		return -1;		
+		// int start = 0;
+		// int end = al.size()-1;
+		// int inx = 0;
+		// while (end < al.size()) {
+			// int size = end-start;
+			// if (size <= 0 )
+				// return -1;
+			// if (size<=1) {
+				// if(al.get(start).equals(target))
+					// return start;
+				// if ((size==1) && (al.get(end).equals(target)))
+					// return end;
+				// return -1;
+			// }
+			// inx = (int)((end-start)/2) + start;
+			// Integer val = (Integer) al.get(inx);
+			// if (val == target)
+				// return inx;
+			// else if (val > target)
+				// end = inx-1;
+			// else 
+				// start = inx+1;
+		// }
+		// return -1;		
   }//end binSearch()
 
   // subgoal: recognize target found (and take what action?)
