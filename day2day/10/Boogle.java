@@ -45,10 +45,10 @@ public class Boogle
 		return -1;
 	}
     int inx = (int)((end-start)/2) + start;
-	Integer val = (Integer)al.get(inx);
+	Integer val = (Integer) al.get(inx);
 	if (val == target)
 		return inx;
-	else if (val>target)
+	else if (val > target)
 		return binSearch(al,target,start,inx-1);
 	else 
 		return binSearch(al,target,inx+1,end);
@@ -57,7 +57,32 @@ public class Boogle
   //return index of target, or -1 if not found
   public static int binSearch( ArrayList al, int target )
   {
-	  return binSearch(al, target, 0, al.size()-1);
+	  //return binSearch(al, target, 0, al.size()-1);
+	  // *this is really the recursive method inside a while loop
+		int start = 0;
+		int end = al.size()-1;
+		int inx = 0;
+		while (end < al.size()) {
+			int size = end-start;
+			if (size <= 0 )
+				return -1;
+			if (size<=1) {
+				if(al.get(start).equals(target))
+					return start;
+				if ((size==1) && (al.get(end).equals(target)))
+					return end;
+				return -1;
+			}
+			inx = (int)((end-start)/2) + start;
+			Integer val = (Integer) al.get(inx);
+			if (val == target)
+				return inx;
+			else if (val > target)
+				end = inx-1;
+			else 
+				start = inx+1;
+		}
+		return -1;		
   }//end binSearch()
 
   // subgoal: recognize target found (and take what action?)
@@ -68,8 +93,6 @@ public class Boogle
   //nota bene: A helper method could be very useful.
   // Q: Why?
   // Q: What would the parameters be for such a method?
-
-
 
   //return ArrayList of random ints on range [lo,lo+hi)
   public static ArrayList prestoArrayListo(int numItems, int lo, int hi)
