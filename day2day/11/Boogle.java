@@ -30,20 +30,12 @@ public class Boogle
   }//end linSearch()
 
 
-
-
-
-
-
-
   //return index of target, or -1 if not found
   public static int binSearch( ArrayList al, int target )
   {
     // <INSERT YOUR MACHINERY HERE>...
     return -1; //placeholder to get past compiler
   }//end binSearch()
-
-
 
   // subgoal: recognize target found (and take what action?)
   // subgoal: recognize search space exhausted (and take what action?)
@@ -53,7 +45,6 @@ public class Boogle
   //nota bene: A helper method could be very useful.
   // Q: Why?
   // Q: What would the parameters be for such a method?
-
 
 
   //return ArrayList of random ints on range [lo,lo+hi)
@@ -113,11 +104,7 @@ public class Boogle
 
 	// change this to return the correct answer
     public static int findSmallest(ArrayList<Integer> al, int lo, int hi) {
-		if ((lo<0) || (lo>al.size()-1))
-			return -1;
-		if ((hi<0) || (hi>al.size()-1))
-			return -1;
-		if (lo > hi)
+		if (lo<0 || lo>hi || hi>=al.size())
 			return -1;
 		
 		int min = al.get(lo);
