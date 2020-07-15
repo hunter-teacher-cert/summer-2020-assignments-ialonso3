@@ -39,11 +39,24 @@ public class Boogle
 	  }
 	  return inx;
   }
+  
+  // public static int findSmallest(ArrayList<Integer> al, int lo, int hi) {
+	// int min = al.get(lo);
+	// int inx = lo;
+	// for (i=lo; i<=hi; i++) {
+		// if ( al.get(i) < min ) {
+			// min = al.get(i);
+			// inx = i;
+		// }	
+	// }
+	// if (lo > hi)
+		// return -1;
+	// return inx;
+  // }
 
   //return index of target, or -1 if not found
   public static int binSearch( ArrayList al, int target, int start, int end )
   {
-	// ArrayList contains integers!!!!!
 	// if the number is repeated, it does not nec. find the first one!!!!
 	int size = end-start;
 	if ((size <= 0 )|| (end >= al.size()))
@@ -55,46 +68,47 @@ public class Boogle
 			return end;
 		return -1;
 	}
+	// ArrayList contains integers!!!!!
     int inx = (int)((end-start)/2) + start;
 	Integer val = (Integer) al.get(inx);
 	if (val == target)
 		// return inx;
 		return getFirst(al,inx);
 	else if (val > target)
-		return binSearch(al,target,start,inx-1);
+		return binSearch(al,target,start,inx);
 	else 
-		return binSearch(al,target,inx+1,end);
+		return binSearch(al,target,inx,end);
   }//end binSearch()
   
   //return index of target, or -1 if not found
   public static int binSearch( ArrayList al, int target )
   {
-	  return binSearch(al, target, 0, al.size()-1);
-	  // *this is really the recursive method inside a while loop
-		// int start = 0;
-		// int end = al.size()-1;
-		// int inx = 0;
-		// while (end < al.size()) {
-			// int size = end-start;
-			// if (size <= 0 )
-				// return -1;
-			// if (size<=1) {
-				// if(al.get(start).equals(target))
-					// return start;
-				// if ((size==1) && (al.get(end).equals(target)))
-					// return end;
-				// return -1;
-			// }
-			// inx = (int)((end-start)/2) + start;
-			// Integer val = (Integer) al.get(inx);
-			// if (val == target)
-				// return inx;
-			// else if (val > target)
-				// end = inx-1;
-			// else 
-				// start = inx+1;
-		// }
-		// return -1;		
+	  // return binSearch(al, target, 0, al.size()-1);
+	  // this is really the recursive method inside a while loop
+		int start = 0;
+		int end = al.size()-1;
+		int inx = 0;
+		while (end < al.size()) {
+			int size = end-start;
+			if (size <= 0 )
+				return -1;
+			if (size<=1) {
+				if(al.get(start).equals(target))
+					return start;
+				if ((size==1) && (al.get(end).equals(target)))
+					return end;
+				return -1;
+			}
+			inx = (int)((end-start)/2) + start;
+			Integer val = (Integer) al.get(inx);
+			if (val == target)
+				return inx;
+			else if (val > target)
+				end = inx;
+			else 
+				start = inx;
+		}
+		return -1;		
   }//end binSearch()
 
   // subgoal: recognize target found (and take what action?)
@@ -174,7 +188,7 @@ public class Boogle
 
 
     // test battery using sorted ArrayLists as search space
-    //~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
+    /*~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
     System.out.println("\n"+"sal000"+":");
     ArrayList sal000 = prestoSortedArrayListo(0,0,0);
     System.out.println(sal000);
@@ -244,6 +258,53 @@ public class Boogle
     System.out.println(linSearch(al,15));
     System.out.println(binSearch(al,15));
     //*/
+	
+	/**
+       ~~~ The RSPB Special Trace-athon ~~~
+       YOUR MISSION:
+       Form a Dynamic Duo of Destiny or a Trio of Triump. Conjure team name portending greatness (TNPG).
+       Copypasta this into main method of your java sourcecode file containing methods linSearch and binSearch
+         (Boogle.java for almost all of you)
+       Verify it works. 
+          (If any test calls do not yield expected outputs, there is some tuning to be done... 
+           Probably best to just grab a working version for now.)
+       On KtS, with at least 1 tracing buddy, trace out each binSearch() call.
+       NOTA BENE: The second batch of test calls are identical to the first, 
+                  except that the search space has grown by 1 element...
+     **/
+    
+    ArrayList salamander = new ArrayList();
+
+    //explicitly fill arraylist with intent to search for
+    // present and nonpresent values...
+    // generate an arraylist with an odd num of elems...
+    salamander.add(4);
+    salamander.add(8);
+    salamander.add(15);
+    salamander.add(16);
+    salamander.add(23);
+    System.out.println(salamander);
+
+    //search for target in the list
+    System.out.println(binSearch(salamander, 8));  // 1
+    System.out.println(binSearch(salamander, 15)); // 2
+    System.out.println(binSearch(salamander, 16)); // 3
+
+    //search for target not in the list
+    System.out.println(binSearch(salamander, 3)); // -1
+    System.out.println(binSearch(salamander, 9)); // -1
+
+    //add another element, for an even num of elems
+    salamander.add(42);
+    System.out.println(salamander);
+    //search for target in the list
+    System.out.println(binSearch(salamander, 8));  // 1
+    System.out.println(binSearch(salamander, 15)); // 2
+    System.out.println(binSearch(salamander, 16)); // 3
+
+    //search for target not in the list
+    System.out.println(binSearch(salamander, 3)); // -1
+    System.out.println(binSearch(salamander, 9)); // -1
   }//end main
 
 }//end class
