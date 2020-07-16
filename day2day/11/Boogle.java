@@ -119,16 +119,19 @@ public class Boogle
   }
   
   // 
-  // Sorts an ArrayList
-  //   Sorts by looping through the unsorted part of the array, 
-  // finding the minimum value, inserting it at the end of the 
-  // sorted part and keeping track of both parts, sorted and not.
+  // Sorts an array
+  //   Separates the array into sorted and unsorted parts. Finds the
+  // extreme value in the unsorted part and inserts it at the correct
+  // end in the sorted part. Updates sorted/unsorted tracker(s).
   //
-  public static void selectionSort(ArrayList<Integer> al) {
+  public static void selectionSort(ArrayList<Integer> al) 
+  {
+	  // start with the whole array
 	  int low = 0;
 	  int end = al.size()-1;
 	  // loop until one less that the end (already sorted)
-	  while ( low < end ) {
+	  while ( low < end ) 
+	  {
 		  // find smallest bet low & end and swap it with low
 		  Collections.swap(al, low, findSmallest(al,low,end));
 		  // increment starting point
