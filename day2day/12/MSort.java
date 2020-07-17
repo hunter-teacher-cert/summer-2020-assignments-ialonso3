@@ -92,28 +92,45 @@ public class MSort
 		// throw new IllegalArgumentException();
     return merged;
   }//merge
+  
+  // INPUT: ArrayList
+  // OUTPUT: sorted ArrayList
+  public static ArrayList<Integer> mergeSort(ArrayList<Integer> al) {
+	  
+	  // if length is <= 1, it is already merhed
+	  if( al.size()<= 1) 
+		  return al;
+	  
+	  // at least 2 
+	  int mid = al.size()/2;
+	  ArrayList<Integer> leftHalf = slice(al, 0, mid);
+	  ArrayList<Integer> rightHalf = slice(al, mid, al.size());
+	  
+	  // merge the slices, making sure they are sorted
+	  return merge( mergeSort(leftHalf), mergeSort(rightHalf) );
+  }
 
   public static void main( String[] args )
   {
     ArrayList<Integer> rando = prestoArrayListo(10, 0, 100);
     ArrayList<Integer> calrissian = prestoArrayListo(10, 0, 100);
-	ArrayList<Integer> empty1 = new ArrayList<Integer>();
-	ArrayList<Integer> empty2 = new ArrayList<Integer>();
+	// ArrayList<Integer> empty1 = new ArrayList<Integer>();
+	// ArrayList<Integer> empty2 = new ArrayList<Integer>();
 
-    selectionSort(rando);
-    selectionSort(calrissian);
+    // selectionSort(rando);
+    // selectionSort(calrissian);
 	
-    System.out.printf("rando: %s\n", rando);
-    System.out.printf("calrissian: %s\n", calrissian);
+    System.out.printf("rando: %s\n", mergeSort(rando));
+    System.out.printf("calrissian: %s\n", mergeSort(calrissian));
 
-    ArrayList<Integer> randoCalrissian = merge(rando, calrissian);
-    System.out.printf("randoCalrissian: %s\n", randoCalrissian);
+    // ArrayList<Integer> randoCalrissian = merge(rando, calrissian);
+    // System.out.printf("randoCalrissian: %s\n", randoCalrissian);
 	
-	selectionSort(empty1);
-    System.out.printf("SSort empty1: %s\n", empty1);
+	// selectionSort(empty1);
+    // System.out.printf("SSort empty1: %s\n", empty1);
 	
-	ArrayList<Integer> emptyMerged = merge(empty1,empty2);
-	System.out.printf("emptyMerged: %s\n", emptyMerged);
+	// ArrayList<Integer> emptyMerged = merge(empty1,empty2);
+	// System.out.printf("emptyMerged: %s\n", emptyMerged);
 
   }//end main
 
