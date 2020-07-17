@@ -97,16 +97,16 @@ public class MSort
   // OUTPUT: sorted ArrayList
   public static ArrayList<Integer> mergeSort(ArrayList<Integer> al) {
 	  
-	  // if length is <= 1, it is already merhed
+	  // if length is <= 1, it is already merged
 	  if( al.size()<= 1) 
 		  return al;
 	  
-	  // at least 2 
+	  // at least 2 elemnts in my list
 	  int mid = al.size()/2;
 	  ArrayList<Integer> leftHalf = slice(al, 0, mid);
 	  ArrayList<Integer> rightHalf = slice(al, mid, al.size());
 	  
-	  // merge the slices, making sure they are sorted
+	  // merge the slices, making sure they are sorted first
 	  return merge( mergeSort(leftHalf), mergeSort(rightHalf) );
   }
 
