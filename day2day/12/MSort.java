@@ -63,8 +63,11 @@ public class MSort
     // indices for each input
 	int i1 = 0;
 	int i2 = 0;
+	// Saving a bit of time by using a tiny bit more space
+	int sizem1 = m1.size();
+	int sizem2 = m2.size();
     //while both indices are less than their respective lengths
-	while (i1<m1.size() && i2<m2.size()) {
+	while (i1<sizem1 && i2<sizem2) {
 		//compare current, add smaller to merged & update index
 		if ( m1.get(i1) < m2.get(i2) ) {
 			merged.add( m1.get(i1) );
@@ -76,33 +79,39 @@ public class MSort
 	}
     //loop ends: one index is past the end of the list
 	//copy the values from the reamining list over
-	while(i1<m1.size()) {
+	while(i1<sizem1) {
 		merged.add(m1.get(i1));
 		i1++;
 	}
-	while(i2<m2.size()) {
+	while(i2<sizem2) {
 		merged.add(m2.get(i2));
 		i2++;
 	}
+	// Allow empty arrays as input? YES
 	// if ( merged.isEmpty() )
 		// throw new IllegalArgumentException();
     return merged;
   }//merge
 
-
   public static void main( String[] args )
   {
     ArrayList<Integer> rando = prestoArrayListo(10, 0, 100);
     ArrayList<Integer> calrissian = prestoArrayListo(10, 0, 100);
+	ArrayList<Integer> empty1 = new ArrayList<Integer>();
+	ArrayList<Integer> empty2 = new ArrayList<Integer>();
 
     selectionSort(rando);
     selectionSort(calrissian);
+
 
     System.out.printf("rando: %s\n", rando);
     System.out.printf("calrissian: %s\n", calrissian);
 
     ArrayList<Integer> randoCalrissian = merge(rando, calrissian);
     System.out.printf("randoCalrissian: %s\n", randoCalrissian);
+	
+	ArrayList<Integer> emptyMerged = merge(empty1,empty2);
+	System.out.printf("emptyMerged: %s\n", emptyMerged);
 
   }//end main
 
