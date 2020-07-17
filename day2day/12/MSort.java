@@ -102,13 +102,15 @@ public class MSort
 
     selectionSort(rando);
     selectionSort(calrissian);
-
-
+	
     System.out.printf("rando: %s\n", rando);
     System.out.printf("calrissian: %s\n", calrissian);
 
     ArrayList<Integer> randoCalrissian = merge(rando, calrissian);
     System.out.printf("randoCalrissian: %s\n", randoCalrissian);
+	
+	selectionSort(empty1);
+    System.out.printf("SSort empty1: %s\n", empty1);
 	
 	ArrayList<Integer> emptyMerged = merge(empty1,empty2);
 	System.out.printf("emptyMerged: %s\n", emptyMerged);
