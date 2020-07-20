@@ -7,7 +7,7 @@ public class BSTree {
     public BSTree(){
 		root = null;
     }
-	
+
 	private void preorderTraverse(TreeNode current) {
 		if (current == null)
 			return;
@@ -65,6 +65,49 @@ public class BSTree {
 		System.out.println();
 	}
 	
+	public void delete(int key) {
+		TreeNode front = root;
+		TreeNode trailer = null;
+		while (front != null){
+			int frontVal = front.getData();
+			if (frontVal == key){  // found it
+				// front is to the left
+				if(trailer.getLeft().getData()==frontVal) {
+					// does front have both left and right?
+					if (front.getRight()!=null && front.getLeft()!=null){
+						// mess	- I need to decide hoe to re-org	
+					} else if (front.getRight() != null) {
+					// front has only a right
+						// point trailer's left to front's right
+						trailer.setLeft(front.getRight());
+						return;
+					} else if (front.getLeft() != null) {
+					// front has only a left
+						// point trailer's left to front's left
+						trailer.setLeft(front.getLeft());
+						return;
+					} else {
+					// both left and right of front are null
+						// just set trailer's left to null
+						trailer.setLeft(null);
+						return;
+					}
+						
+				} else {
+				// front is to the right
+					// same as left but to te other side
+				}
+			} else if (frontVal < key){
+				trailer = front;
+				front = front.getRight();
+			} else {
+				trailer = front;
+				front = front.getLeft();
+			}
+		}
+		throw new NullPointerException();
+	}
+	
 	public void insert(int key) {
 		TreeNode newNode = new TreeNode(key);
 		if (root==null) {
@@ -87,11 +130,33 @@ public class BSTree {
 		}
 		// front points to null
 		// trailer points to previous
+		//****************************
 		if (trailer.getData() < key )
 			trailer.setRight(newNode);
 		else
 			trailer.setLeft(newNode);
 	}
+	
+	// finds the Node with that key &
+	// returns the previous one
+	// private TreeNode getPrevious(int key)
+	// {
+		// TreeNode front = root;
+		// TreeNode trailer = null;
+		// while (front != null){
+			// int frontVal = front.getData();
+			// if (frontVal == key){
+				// return trailer;
+			// } else if (frontVal < key){
+				// trailer = front;
+				// front = front.getRight();
+			// } else {
+				// trailer = front;
+				// front = front.getLeft();
+			// }
+		// }
+		// return trailer;
+	// }
 	
 	public int search(int key){
 		TreeNode curr = root;
