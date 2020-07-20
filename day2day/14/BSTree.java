@@ -65,15 +65,32 @@ public class BSTree {
 		System.out.println();
 	}
 	
-	private int getMaxLeft(TreeNode curr) {
-		int max = 0;
-		while (curr != null) {
-			if (curr.getData() > max)
-				max = curr.getData();
-			curr = curr.getLeft();
-		}
-		return max;		
+	
+	private void getMaxLeft(TreeNode curr, ArrayList<Integer> al) {
+		if (curr == null)
+			return;
+		
+		// process left
+		getMaxLeft(curr.getLeft(),al);
+		
+		//process the current node
+		al.add(curr.getData());
+		
+		//process right
+		getMaxLeft(curr.getRight(),al);
 	}
+	
+	// private int getMinRight(TreeNode curr) {
+		// if (curr == null)
+			// throw new NullPointerException();
+		// int min = curr.getData();
+		// while (curr != null) {
+			// if (curr.getData() < min)
+				// min = curr.getData();
+			// curr = curr.getRight();
+		// }
+		// return min;		
+	// }
 	
 	// ************* DELETE **************8
 	// Z's delete skeleton
@@ -113,7 +130,7 @@ public class BSTree {
 		
 		// Is front to the Left or Right of trailer?
 		boolean isLeft = false;
-		if (trailer.getLeft().getData()==front.getData())
+		if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
 			isLeft = true;
 		
 		if (front.getLeft()!= null && front.getRight()!= null) {
@@ -122,10 +139,17 @@ public class BSTree {
 		// find the node with the largest value
 		// on fronts left subtree
 		// and replace front with it.
-		// TRUSTING!!!!
-			int maxVal = getMaxLeft(front.getLeft());		
-			delete(maxVal);
-			front.setValue(maxVal);
+			// if (isLeft) {
+				ArrayList<Integer> al = new ArrayList<Integer>();
+				getMaxLeft(front.getLeft(),al);
+				int maxVal = al.get(al.size()-1);
+				delete(maxVal);
+				front.setValue(maxVal);
+			// } else {
+				// int minVal = getMinRight(front.getRight());		
+				// delete(minVal);
+				// front.setValue(minVal);
+			// }
 		} else {
 			// front has one or no children
 			TreeNode setNode = null;
