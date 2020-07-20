@@ -36,9 +36,18 @@ public class Driver {
 		t.inorderTraverse();
 		t.insert(25);
 		t.inorderTraverse();
-		t.delete(10);
-		t.inorderTraverse();
 		t.delete(7);
 		t.inorderTraverse();
+		t.delete(10);
+		t.inorderTraverse();
+		t.delete(25);
+		t.inorderTraverse();
+		t.delete(3);
+		t.inorderTraverse();
+		t.delete(8);
+		t.inorderTraverse();
+		t.delete(20);
+		t.inorderTraverse();
+		
     }
 }
