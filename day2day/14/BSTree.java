@@ -65,6 +65,87 @@ public class BSTree {
 		System.out.println();
 	}
 	
+	private int getMaxLeft(TreeNode curr) {
+		int max = 0;
+		while (curr != null) {
+			if (curr.getData() > max)
+				max = curr.getData();
+			curr = curr.getLeft();
+		}
+		return max;		
+	}
+	
+	// ************* DELETE **************8
+	// Z's delete skeleton
+	public void delete(int key){
+
+		// if the tree is empty, nothing to delete
+		if (root==null){
+			return;
+		}
+		
+		// find the node that we want to delete
+		// and the node above it using piggybacking
+		TreeNode front = root;
+		TreeNode trailer = root;
+
+		// do the piggyback loop
+		// until we either find the node or null
+		// if the key isn't present
+		while (front != null && front.getData() != key ){
+			if (front.getData() < key){
+				trailer = front;
+				front = front.getRight();
+			} else {
+				trailer = front;
+				front = front.getLeft();
+			}
+		}
+
+		// if the key wasn't in the tree
+		if (front == null){
+			return;
+		}
+
+		// if we get here
+		// front points to the node we want to delete
+		// and trailer points to the one above it
+		
+		// Is front to the Left or Right of trailer?
+		boolean isLeft = false;
+		if (trailer.getLeft().getData()==front.getData())
+			isLeft = true;
+		
+		if (front.getLeft()!= null && front.getRight()!= null) {
+		// front has two children
+		//
+		// find the node with the largest value
+		// on fronts left subtree
+		// and replace front with it.
+		// TRUSTING!!!!
+			int maxVal = getMaxLeft(front.getLeft());		
+			delete(maxVal);
+			front.setValue(maxVal);
+		} else {
+			// front has one or no children
+			TreeNode setNode = null;
+			if (front.getRight() != null){
+				// repoint front's parent to front's right
+				setNode = front.getRight();
+			} else if (front.getLeft() != null){
+				// repoint front's parent to front's left
+				setNode = front.getLeft();
+			}// otherwise no children, e.g., null
+			if (isLeft)
+				// front is a left child
+				trailer.setLeft(setNode);
+			else
+				// front is a right child
+				trailer.setRight(setNode);
+		}
+	}
+	
+	/********************************************
 	// use the transverse to insert all the nodes
 	// in a given orphaned tree
 	private void inorderInsert(TreeNode current) {
@@ -77,7 +158,7 @@ public class BSTree {
 		//process right
 		inorderTraverse(current.getRight());	
 	}
-	
+
 	public void delete(int key) {
 		TreeNode front = root;
 		TreeNode trailer = null;
@@ -120,18 +201,18 @@ public class BSTree {
 							// Insert all the Nodes on front's left
 							this.inorderInsert(front.getLeft());				
 						} else if (front.getRight() != null) {
-						// front has only a right
-							// point trailer's right to front's right
+						front has only a right
+							point trailer's right to front's right
 							trailer.setRight(front.getRight());
 							return;
 						} else if (front.getLeft() != null) {
-						// front has only a left
-							// point trailer's right to front's left
+						front has only a left
+							point trailer's right to front's left
 							trailer.setRight(front.getLeft());
 							return;
 						} else {
-						// both left and right of front are null
-							// just set trailer's left to null
+						both left and right of front are null
+							just set trailer's left to null
 							trailer.setRight(null);
 							return;
 						}
@@ -151,6 +232,7 @@ public class BSTree {
 		}
 		throw new NullPointerException();
 	}
+	// ********************************/
 	
 	public void insert(int key) {
 		TreeNode newNode = new TreeNode(key);
@@ -172,9 +254,8 @@ public class BSTree {
 				front = front.getLeft();
 			}
 		}
-		// front points to null
-		// trailer points to previous
-		//****************************
+		//front points to null
+		//trailer points to previous
 		if (trailer.getData() < key )
 			trailer.setRight(newNode);
 		else
