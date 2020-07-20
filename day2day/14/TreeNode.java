@@ -2,36 +2,36 @@ import java.io.*;
 import java.util.*;
 
 public class TreeNode {
-    private int data;
+    private int value;
     private TreeNode left;
 	private TreeNode right;
 
-    public TreeNode(int data, TreeNode left, TreeNode right){
+    public TreeNode(int value, TreeNode left, TreeNode right){
 		this.left = left;
 		this.right = right;
-		this.data = data;
+		this.value = value;
     }
 	
-	public TreeNode(int data, TreeNode left) {
+	public TreeNode(int value, TreeNode left) {
 		this.left = left;
 		this.right = null;
-		this.data = data;
+		this.value = value;
 	}
 	
-    public TreeNode(int data){
+    public TreeNode(int value){
 		this.left = null;
 		this.right = null;
-		this.data = data;
+		this.value = value;
     }
 	
     public TreeNode(){
 		this.left = null;
 		this.right = null;
-		this.data = 0;
+		this.value = 0;
     }
     
-    public void setData(int data){
-		this.data = data;
+    public void setValue(int value){
+		this.value = value;
     }
     
     public void setLeft(TreeNode left){
@@ -42,8 +42,8 @@ public class TreeNode {
 		this.right = right;
     }
 	
-    public int getData(){
-		return data;
+    public int getValue(){
+		return value;
     }
 	
     public TreeNode getLeft(){
