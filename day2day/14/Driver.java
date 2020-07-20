@@ -28,7 +28,9 @@ public class Driver {
 		t.insert(8);
 		t.insert(3);
 		
-		t.traverse();
+		t.preorderTraverse();
+		t.postorderTraverse();
+		t.inorderTraverse();
 		
     }
 }
