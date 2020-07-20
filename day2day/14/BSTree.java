@@ -65,37 +65,81 @@ public class BSTree {
 		System.out.println();
 	}
 	
+	// use the transverse to insert all the nodes
+	// in a given orphaned tree
+	private void inorderInsert(TreeNode current) {
+		if (current == null)
+			return;	
+		// process left
+		inorderTraverse(current.getLeft());	
+		//process the current node
+		insert(current.getData());
+		//process right
+		inorderTraverse(current.getRight());	
+	}
+	
 	public void delete(int key) {
 		TreeNode front = root;
 		TreeNode trailer = null;
 		while (front != null){
 			int frontVal = front.getData();
 			if (frontVal == key){  // found it
-				// front is to the left
-				if(trailer.getLeft().getData()==frontVal) {
-					// does front have both left and right?
-					if (front.getRight()!=null && front.getLeft()!=null){
-						// mess	- I need to decide hoe to re-org	
-					} else if (front.getRight() != null) {
-					// front has only a right
-						// point trailer's left to front's right
-						trailer.setLeft(front.getRight());
-						return;
-					} else if (front.getLeft() != null) {
-					// front has only a left
-						// point trailer's left to front's left
-						trailer.setLeft(front.getLeft());
-						return;
+				if (trailer != null) {
+					// front is to the left
+					if(trailer.getLeft().getData()==frontVal) {
+						// does front have both left and right?
+						if (front.getRight()!=null && front.getLeft()!=null){
+							// trailer left points to front's left
+							trailer.setLeft(front.getLeft());
+							// but front's right side is orphaned
+							// Insert all the Nodes on front's right
+							this.inorderInsert(front.getRight());				
+						} else if (front.getRight() != null) {
+						// front has only a right
+							// point trailer's left to front's right
+							trailer.setLeft(front.getRight());
+							return;
+						} else if (front.getLeft() != null) {
+						// front has only a left
+							// point trailer's left to front's left
+							trailer.setLeft(front.getLeft());
+							return;
+						} else {
+						// both left and right of front are null
+							// just set trailer's left to null
+							trailer.setLeft(null);
+							return;
+						}	
 					} else {
-					// both left and right of front are null
-						// just set trailer's left to null
-						trailer.setLeft(null);
-						return;
+					// front is to the right
+						// does front have both left and right?
+						if (front.getRight()!=null && front.getLeft()!=null){
+							// trailer right points to front's right
+							trailer.setRight(front.getRight());
+							// but front's left side is orphaned
+							// Insert all the Nodes on front's left
+							this.inorderInsert(front.getLeft());				
+						} else if (front.getRight() != null) {
+						// front has only a right
+							// point trailer's right to front's right
+							trailer.setRight(front.getRight());
+							return;
+						} else if (front.getLeft() != null) {
+						// front has only a left
+							// point trailer's right to front's left
+							trailer.setRight(front.getLeft());
+							return;
+						} else {
+						// both left and right of front are null
+							// just set trailer's left to null
+							trailer.setRight(null);
+							return;
+						}
 					}
-						
 				} else {
-				// front is to the right
-					// same as left but to te other side
+				// key is at the root
+					front.setLeft(root.getLeft());
+					this.inorderInsert(front.getRight());
 				}
 			} else if (frontVal < key){
 				trailer = front;
