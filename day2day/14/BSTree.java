@@ -8,6 +8,63 @@ public class BSTree {
 		root = null;
     }
 	
+	private void preorderTraverse(TreeNode current) {
+		if (current == null)
+			return;
+		
+		//process the current node
+		System.out.print(current.getData()+", ");
+		
+		// process left
+		preorderTraverse(current.getLeft());
+		
+		//process right
+		preorderTraverse(current.getRight());
+		
+	}
+	public void preorderTraverse() {
+		preorderTraverse(root);
+		System.out.println();
+	}
+	
+	private void postorderTraverse(TreeNode current) {
+		if (current == null)
+			return;
+		
+		// process left
+		postorderTraverse(current.getLeft());
+		
+		//process right
+		postorderTraverse(current.getRight());
+		
+		//process the current node
+		System.out.print(current.getData()+", ");
+		
+	}
+	public void postorderTraverse() {
+		postorderTraverse(root);
+		System.out.println();
+	}
+	
+	private void inorderTraverse(TreeNode current) {
+		if (current == null)
+			return;
+		
+		// process left
+		inorderTraverse(current.getLeft());
+		
+		//process the current node
+		System.out.print(current.getData()+", ");
+		
+		//process right
+		inorderTraverse(current.getRight());
+		
+	}
+	public void inorderTraverse() {
+		inorderTraverse(root);
+		System.out.println();
+	}
+	
 	public void insert(int key) {
 		TreeNode newNode = new TreeNode(key);
 		if (root==null) {
