@@ -32,7 +32,13 @@ public class Driver {
 		t.postorderTraverse();
 		t.inorderTraverse();
 		
-		t.delete(3);
+		t.delete(5);
+		t.inorderTraverse();
+		t.insert(25);
+		t.inorderTraverse();
+		t.delete(10);
+		t.inorderTraverse();
+		t.delete(7);
 		t.inorderTraverse();
     }
 }
