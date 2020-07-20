@@ -32,5 +32,7 @@ public class Driver {
 		t.postorderTraverse();
 		t.inorderTraverse();
 		
+		t.delete(3);
+		t.inorderTraverse();
     }
 }
