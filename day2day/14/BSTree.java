@@ -66,21 +66,21 @@ public class BSTree {
 	}
 	
 	private int getMax(TreeNode curr) {
-		TreeNode trailer = null;
+		int max = -1;
 		while (curr != null) {
-			trailer = curr;
+			max = curr.getData();
 			curr = curr.getRight();
 		}
-		return trailer.getData();
+		return max;
 	}
 	
 	private int getMin(TreeNode curr) {
-		TreeNode trailer = null;
+		int min = -1;
 		while (curr != null) {
-			trailer = curr;
+			min = curr.getData();
 			curr = curr.getLeft();
 		}
-		return trailer.getData();
+		return min;
 	}
 
 	// ************* DELETE **************8
@@ -121,14 +121,14 @@ public class BSTree {
 			// isLeft = true;
 		
 		if (front.getLeft()!= null) {
-		// front has two children or is key
-		//
 		// find the node with the largest value
 		// on front's left subtree & replace front with it.
 			int maxVal = getMax(front.getLeft());
 			delete(maxVal);
 			front.setValue(maxVal);
 		} else if (front.getRight() != null) {
+		// find the node with the smalles value
+		// on front's right subtree & replace front with it.
 			int minVal = getMin(front.getRight());
 			delete(minVal);
 			front.setValue(minVal);
