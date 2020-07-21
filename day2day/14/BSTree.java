@@ -86,27 +86,21 @@ public class BSTree {
 	// ************* DELETE **************8
 	// Z's delete skeleton
 	public void delete(int key){
-
-		// if the tree is empty, nothing to delete
-		if (root==null){
-			return;
-		}
 		
 		TreeNode front = root;
 		TreeNode trailer = root;
-
 		while (front != null && front.getData()!=key ){
+			trailer = front;
 			if (front.getData() < key){
-				trailer = front;
 				front = front.getRight();
 			} else {
-				trailer = front;
 				front = front.getLeft();
 			}
 		}
-		// if front is the key, then front==trailer==root
+		// if front == key, then front==trailer==root
 		
 		// if the key wasn't in the tree
+		// or the tree is empty
 		if (front == null){
 			return;
 		}
@@ -115,11 +109,6 @@ public class BSTree {
 		// front points to the node we want
 		// and trailer points to the one above it
 		
-		// Is front to the Left or Right of trailer?
-		// boolean isLeft = false;
-		// if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
-			// isLeft = true;
-		
 		if (front.getLeft()!= null) {
 		// find the node with the largest value
 		// on front's left subtree & replace front with it.
@@ -127,15 +116,15 @@ public class BSTree {
 			delete(maxVal);
 			front.setValue(maxVal);
 		} else if (front.getRight() != null) {
-		// find the node with the smalles value
+		// find the node with the smallest value
 		// on front's right subtree & replace front with it.
 			int minVal = getMin(front.getRight());
 			delete(minVal);
 			front.setValue(minVal);
 		} else {
-			// front has no children
+		// front has no children
 			if (front==trailer){
-					// root is the key
+					// root is the key 
 					root = null;
 			} else {
 				if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
@@ -146,7 +135,7 @@ public class BSTree {
 					trailer.setRight(null);
 			}
 		}
-		/**************************
+		/***********other cases***************
 		else {
 			// front has one or no children	
 			TreeNode setNode = null;
