@@ -92,12 +92,10 @@ public class BSTree {
 			return;
 		}
 		
-		System.out.printf("root= %d\n",root.getData());
-		
 		TreeNode front = root;
 		TreeNode trailer = root;
 
-		while (front != null && front.getData() != key ){
+		while (front != null && front.getData()!=key ){
 			if (front.getData() < key){
 				trailer = front;
 				front = front.getRight();
@@ -170,8 +168,8 @@ public class BSTree {
 					// front is a right child
 					trailer.setRight(setNode);
 			}
-		//***************************************?
 		}
+		//***************************************/
 	}
 	
 	public void insert(int key) {
