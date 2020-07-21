@@ -65,7 +65,7 @@ public class BSTree {
 		System.out.println();
 	}
 	
-	private int getMaxLeft(TreeNode curr) {
+	private int getMax(TreeNode curr) {
 		TreeNode trailer = null;
 		while (curr != null) {
 			trailer = curr;
@@ -74,16 +74,15 @@ public class BSTree {
 		return trailer.getData();
 	}
 	
-	// private int getMinRight(TreeNode curr) {
-		// TreeNode trailer = null;
-		// while (curr != null) {
-			// trailer = curr;
-			// curr = curr.getLeft();
-		// }
-		// return trailer.getData();
-	// }
+	private int getMin(TreeNode curr) {
+		TreeNode trailer = null;
+		while (curr != null) {
+			trailer = curr;
+			curr = curr.getLeft();
+		}
+		return trailer.getData();
+	}
 
-	
 	// ************* DELETE **************8
 	// Z's delete skeleton
 	public void delete(int key){
@@ -92,6 +91,8 @@ public class BSTree {
 		if (root==null){
 			return;
 		}
+		
+		System.out.printf("root= %d\n",root.getData());
 		
 		TreeNode front = root;
 		TreeNode trailer = root;
@@ -105,7 +106,8 @@ public class BSTree {
 				front = front.getLeft();
 			}
 		}
-
+		// if front is the key, then front==trailer==root
+		
 		// if the key wasn't in the tree
 		if (front == null){
 			return;
@@ -116,23 +118,39 @@ public class BSTree {
 		// and trailer points to the one above it
 		
 		// Is front to the Left or Right of trailer?
-		boolean isLeft = false;
-		if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
-			isLeft = true;
+		// boolean isLeft = false;
+		// if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
+			// isLeft = true;
 		
-		if (front.getLeft()!= null && front.getRight()!= null) {
-		// front has two children
+		if (front.getLeft()!= null) {
+		// front has two children or is key
 		//
 		// find the node with the largest value
 		// on front's left subtree & replace front with it.
-			int maxVal = getMaxLeft(front.getLeft());
+			int maxVal = getMax(front.getLeft());
 			delete(maxVal);
 			front.setValue(maxVal);
-			// int minVal = getMinRight(front.getRight());
-			// delete(minVal);
-			// front.setValue(minVal);
+		} else if (front.getRight() != null) {
+			int minVal = getMin(front.getRight());
+			delete(minVal);
+			front.setValue(minVal);
 		} else {
-			// front has one or no children
+			// front has no children
+			if (front==trailer){
+					// root is the key
+					root = null;
+			} else {
+				if (trailer.getLeft()!=null && trailer.getLeft().getData()==front.getData())
+					// front is a left child
+					trailer.setLeft(null);
+				else
+					// front is a right child
+					trailer.setRight(null);
+			}
+		}
+		/**************************
+		else {
+			// front has one or no children	
 			TreeNode setNode = null;
 			if (front.getRight() != null){
 				// repoint front's parent to front's right
@@ -141,12 +159,18 @@ public class BSTree {
 				// repoint front's parent to front's left
 				setNode = front.getLeft();
 			}// otherwise no children, e.g., null
-			if (isLeft)
-				// front is a left child
-				trailer.setLeft(setNode);
-			else
-				// front is a right child
-				trailer.setRight(setNode);
+			if (front==trailer){
+					// root is the key
+					root = setNode;
+			} else {
+				if (isLeft)
+					// front is a left child
+					trailer.setLeft(setNode);
+				else
+					// front is a right child
+					trailer.setRight(setNode);
+			}
+		//***************************************?
 		}
 	}
 	
@@ -191,6 +215,7 @@ public class BSTree {
 			}
 		}
 		throw new NullPointerException();
+		// return -1;
     }
 
     public void seed(){
