@@ -22,15 +22,10 @@ public class Driver {
 		//*/
 		
 		t.insert(10);
-		t.inorderTraverse();
 		t.insert(20);
-		t.inorderTraverse();
 		t.insert(5);
-		t.inorderTraverse();
 		t.insert(7);
-		t.inorderTraverse();
 		t.insert(8);
-		t.inorderTraverse();
 		t.insert(3);
 		t.inorderTraverse();
 		
@@ -46,6 +41,9 @@ public class Driver {
 		t.inorderTraverse();
 		System.out.println("*********Delete 7*******");
 		t.delete(7);
+		t.inorderTraverse();
+		System.out.println("*********Delete 90 NOT*******");
+		t.delete(90);
 		t.inorderTraverse();
 		System.out.println("*********Delete 10*******");
 		t.delete(10);
